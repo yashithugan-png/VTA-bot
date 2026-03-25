@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP TEACH ACADEMY - Professional Signal Bot</title>
+    <style>
+/* VIP TEACH ACADEMY - Professional Signal Bot Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-bg: #0a0e17;
+    --secondary-bg: #111827;
+    --card-bg: #1a2332;
+    --card-border: #2d3748;
+    --accent-green: #00ff88;
+    --accent-red: #ff4757;
+    --accent-blue: #3b82f6;
+    --accent-gold: #ffd700;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--primary-bg) 0%, #0f172a 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Main Container */
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    padding-bottom: 80px;
+}
+
+/* Branding Header */
+.branding-header {
+    text-align: center;
+    padding: 20px 0 30px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 25px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent-gold), #ffaa00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+}
+
+.logo-subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    letter-spacing: 4px;
+    margin-top: 5px;
+}
+
+/* Live Price Header */
+.price-header {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid var(--card-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.price-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+}
+
+.price-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.asset-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.asset-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.live-price {
+    font-size: 36px;
+    font-weight: 800;
+    transition: color 0.3s ease;
+}
+
+.live-price.up {
+    color: var(--accent-green);
+}
+
+.live-price.down {
+    color: var(--accent-red);
+}
+
+.price-change {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.price-change.positive {
+    color: var(--accent-green);
+}
+
+.price-change.negative {
+    color: var(--accent-red);
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--card-border);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Controls Section */
+.controls-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.control-group {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid var(--card-border);
+}
+
+.control-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.control-select {
+    width: 100%;
+    padding: 12px 15px;
+    background: var(--secondary-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.control-select:hover {
+    border-color: var(--accent-blue);
+}
+
+.control-select:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.btn {
+    flex: 1;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, var(--accent-green), #00cc6a);
+    color: #000;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+}
+
+.btn-stop {
+    background: linear-gradient(135deg, var(--accent-red), #cc0033);
+    color: #fff;
+}
+
+.btn-stop:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 71, 87, 0.3);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Indicator Grid */
+.indicator-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 1200px) {
+    .indicator-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .indicator-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .indicator-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.indicator-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 18px;
+    border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+}
+
+.indicator-card:hover {
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.indicator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.indicator-name {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.indicator-status {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.status-bullish {
+    background: rgba(0, 255, 136, 0.15);
+    color: var(--accent-green);
+}
+
+.status-bearish {
+    background: rgba(255, 71, 87, 0.15);
+    color: var(--accent-red);
+}
+
+.status-neutral {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--accent-blue);
+}
+
+.indicator-value {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.indicator-details {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Signal Display */
+.signal-display {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    border: 2px solid var(--card-border);
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.signal-display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--card-border);
+    transition: background 0.3s ease;
+}
+
+.signal-display.signal-call::before {
+    background: var(--accent-green);
+}
+
+.signal-display.signal-put::before {
+    background: var(--accent-red);
+}
+
+.signal-watermark {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 10px;
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.signal-status {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+}
+
+.signal-type {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    letter-spacing: 3px;
+}
+
+.signal-type.call {
+    color: var(--accent-green);
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+}
+
+.signal-type.put {
+    color: var(--accent-red);
+    text-shadow: 0 0 30px rgba(255, 71, 87, 0.5);
+}
+
+.signal-confidence {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.signal-confidence span {
+    color: var(--accent-gold);
+    font-weight: 700;
+}
+
+.countdown-display {
+    font-size: 24px;
+    color: var(--text-primary);
+    margin-top: 15px;
+    padding: 15px;
+    background: var(--secondary-bg);
+    border-radius: 10px;
+    display: none;
+}
+
+.countdown-display.active {
+    display: block;
+}
+
+.countdown-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+.countdown-timer {
+    font-size: 36px;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+}
+
+/* Result Display */
+.result-display {
+    font-size: 32px;
+    font-weight: 800;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
+}
+
+.result-display.win {
+    display: block;
+    background: rgba(0, 255, 136, 0.2);
+    color: var(--accent-green);
+    border: 2px solid var(--accent-green);
+}
+
+.result-display.loss {
+    display: block;
+    background: rgba(255, 71, 87, 0.2);
+    color: var(--accent-red);
+    border: 2px solid var(--accent-red);
+}
+
+/* Trade History Panel */
+.history-section {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid var(--card-border);
+}
+
+.history-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 10px;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: var(--secondary-bg);
+    border-radius: 8px;
+    border-left: 4px solid transparent;
+}
+
+.history-item.win {
+    border-left-color: var(--accent-green);
+}
+
+.history-item.loss {
+    border-left-color: var(--accent-red);
+}
+
+.history-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.history-asset {
+    font-weight: bold;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.history-result {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.history-result.win {
+    color: var(--accent-green);
+}
+
+.history-result.loss {
+    color: var(--accent-red);
+}
+
+/* Connection Status */
+.connection-status {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: var(--card-bg);
+    border-radius: 25px;
+    border: 1px solid var(--card-border);
+    font-size: 13px;
+    z-index: 100;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-red);
+    animation: pulse 2s infinite;
+}
+
+.status-dot.connected {
+    background: var(--accent-green);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Watermark */
+.main-watermark {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 11px;
+    color: var(--text-muted);
+    opacity: 0.4;
+    letter-spacing: 1px;
+    z-index: 100;
+}
+
+/* Loading Animation */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--text-muted);
+    border-radius: 50%;
+    border-top-color: var(--accent-blue);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Price Flash Animation */
+@keyframes flashGreen {
+    0% { background: transparent; }
+    50% { background: rgba(0, 255, 136, 0.1); }
+    100% { background: transparent; }
+}
+
+@keyframes flashRed {
+    0% { background: transparent; }
+    50% { background: rgba(255, 71, 87, 0.1); }
+    100% { background: transparent; }
+}
+
+.flash-green {
+    animation: flashGreen 0.3s ease;
+}
+
+.flash-red {
+    animation: flashRed 0.3s ease;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 15px;
+    }
+    
+    .logo {
+        font-size: 22px;
+    }
+    
+    .live-price {
+        font-size: 28px;
+    }
+    
+    .signal-type {
+        font-size: 36px;
+    }
+    
+    .indicator-card {
+        padding: 15px;
+    }
+    
+    .indicator-value {
+        font-size: 24px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--primary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--card-border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+    </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="branding-header">
+            <div class="logo">VIP TEACH ACADEMY</div>
+            <div class="logo-subtitle">PROFESSIONAL TRADING SIGNALS (CONFLUENCE STRATEGY)</div>
+        </header>
+
+        <section class="price-header">
+            <div class="price-main">
+                <div class="asset-info">
+                    <span class="asset-name" id="assetName">VOLATILITY 10 (1S)</span>
+                    <span class="live-price" id="livePrice">--.----</span>
+                </div>
+                <div class="price-change" id="priceChange">
+                    <span id="changeIcon">▲</span>
+                    <span id="changeValue">0.00%</span>
+                </div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">Open</div>
+                    <div class="stat-value" id="statOpen">--</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">High</div>
+                    <div class="stat-value" id="statHigh">--</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Low</div>
+                    <div class="stat-value" id="statLow">--</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Close</div>
+                    <div class="stat-value" id="statClose">--</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Spread</div>
+                    <div class="stat-value" id="statSpread">--</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Change %</div>
+                    <div class="stat-value" id="statChange">--</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Volume</div>
+                    <div class="stat-value" id="statVolume">--</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Ticks/Sec</div>
+                    <div class="stat-value" id="statTicks">--</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="controls-section">
+            <div class="control-group">
+                <label class="control-label">Select Asset</label>
+                <select class="control-select" id="assetSelect">
+                    <optgroup label="Volatility Indices">
+                        <option value="1HZ10V">Volatility 10 (1s) Index</option>
+                        <option value="1HZ25V">Volatility 25 (1s) Index</option>
+                        <option value="1HZ50V">Volatility 50 (1s) Index</option>
+                        <option value="1HZ75V">Volatility 75 (1s) Index</option>
+                        <option value="1HZ100V">Volatility 100 (1s) Index</option>
+                        <option value="R_10">Volatility 10 Index</option>
+                        <option value="R_25">Volatility 25 Index</option>
+                        <option value="R_50">Volatility 50 Index</option>
+                        <option value="R_75">Volatility 75 Index</option>
+                        <option value="R_100">Volatility 100 Index</option>
+                    </optgroup>
+                    <optgroup label="Forex">
+                        <option value="frxXAUUSD">XAU/USD</option>
+                        <option value="frxEURUSD" selected>EUR/USD</option>
+                        <option value="frxGBPUSD">GBP/USD</option>
+                        <option value="frxUSDJPY">USD/JPY</option>
+                        <option value="frxUSDCAD">USD/CAD</option>
+                        <option value="frxAUDUSD">AUD/USD</option>
+                        <option value="frxUSDCHF">USD/CHF</option>
+                        <option value="frxNZDUSD">NZD/USD</option>
+                    </optgroup>
+                    <optgroup label="OTC Pairs">
+                        <option value="frxEURUSD_OTC">EUR/USD OTC</option>
+                        <option value="frxGBPUSD_OTC">GBP/USD OTC</option>
+                        <option value="frxUSDJPY_OTC">USD/JPY OTC</option>
+                        <option value="frxAUDUSD_OTC">AUD/USD OTC</option>
+                        <option value="frxEURJPY_OTC">EUR/JPY OTC</option>
+                        <option value="frxGBPJPY_OTC">GBP/JPY OTC</option>
+                    </optgroup>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Min. Signal Accuracy</label>
+                <select class="control-select" id="confidenceSelect">
+                    <option value="50">50% Accuracy</option>
+                    <option value="60">60% Accuracy</option>
+                    <option value="70">70% Accuracy</option>
+                    <option value="75">75% Accuracy</option>
+                    <option value="80" selected>80% Accuracy</option>
+                    <option value="85">85% Accuracy</option>
+                    <option value="90">90% Accuracy (Strict)</option>
+                    <option value="95">95% Accuracy (Very Strict)</option>
+                    <option value="100">100% Accuracy (Perfect)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Analysis Timeframe</label>
+                <select class="control-select" id="timeframeSelect">
+                    <option value="60">M1 (1 Minute)</option>
+                    <option value="300">M5 (5 Minutes)</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Trade Duration</label>
+                <select class="control-select" id="durationSelect">
+                    <option value="1">1 Minute</option>
+                    <option value="2">2 Minutes</option>
+                    <option value="3">3 Minutes</option>
+                    <option value="4">4 Minutes</option>
+                    <option value="5">5 Minutes</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="action-buttons">
+            <button class="btn btn-start" id="startBtn">▶ Start Analysis</button>
+            <button class="btn btn-stop" id="stopBtn" disabled>■ Stop Analysis</button>
+        </section>
+
+        <section class="indicator-grid">
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">RSI</span>
+                    <span class="indicator-status status-neutral" id="rsiStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="rsiValue">--</div>
+                <div class="indicator-details" id="rsiDetails">Waiting for data...</div>
+            </div>
+
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">MACD</span>
+                    <span class="indicator-status status-neutral" id="macdStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="macdValue">--</div>
+                <div class="indicator-details" id="macdDetails">Waiting for data...</div>
+            </div>
+
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">EMA Cross</span>
+                    <span class="indicator-status status-neutral" id="emaStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="emaValue">--</div>
+                <div class="indicator-details" id="emaDetails">Waiting for data...</div>
+            </div>
+
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">Stochastic</span>
+                    <span class="indicator-status status-neutral" id="stochStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="stochValue">--</div>
+                <div class="indicator-details" id="stochDetails">Waiting for data...</div>
+            </div>
+
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">Bollinger Bands</span>
+                    <span class="indicator-status status-neutral" id="bbStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="bbValue">--</div>
+                <div class="indicator-details" id="bbDetails">Waiting for data...</div>
+            </div>
+
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">Volume</span>
+                    <span class="indicator-status status-neutral" id="volStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="volValue">--</div>
+                <div class="indicator-details" id="volDetails">Waiting for data...</div>
+            </div>
+
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">S/R Levels</span>
+                    <span class="indicator-status status-neutral" id="srStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="srValue">--</div>
+                <div class="indicator-details" id="srDetails">Waiting for data...</div>
+            </div>
+
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">Momentum</span>
+                    <span class="indicator-status status-neutral" id="momStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="momValue">--</div>
+                <div class="indicator-details" id="momDetails">Waiting for data...</div>
+            </div>
+
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">Trend</span>
+                    <span class="indicator-status status-neutral" id="trendStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="trendValue">--</div>
+                <div class="indicator-details" id="trendDetails">Waiting for data...</div>
+            </div>
+
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">Volatility</span>
+                    <span class="indicator-status status-neutral" id="volaStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="volaValue">--</div>
+                <div class="indicator-details" id="volaDetails">Waiting for data...</div>
+            </div>
+
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">Chart Pattern</span>
+                    <span class="indicator-status status-neutral" id="patternStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="patternValue">--</div>
+                <div class="indicator-details" id="patternDetails">Waiting for data...</div>
+            </div>
+
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <span class="indicator-name">Signal Strength</span>
+                    <span class="indicator-status status-neutral" id="strengthStatus">NEUTRAL</span>
+                </div>
+                <div class="indicator-value" id="strengthValue">--</div>
+                <div class="indicator-details" id="strengthDetails">Waiting for data...</div>
+            </div>
+        </section>
+
+        <section class="signal-display" id="signalDisplay">
+            <div class="signal-status" id="signalStatus">Waiting for analysis to start...</div>
+            <div class="signal-type" id="signalType">--</div>
+            <div class="signal-confidence" id="signalConfidence">Start Time: <span>--:--:--</span></div>
+            <div class="countdown-display" id="countdownDisplay">
+                <div class="countdown-label">Next signal in:</div>
+                <div class="countdown-timer" id="countdownTimer">00:00</div>
+            </div>
+            <div class="result-display" id="resultDisplay"></div>
+            <div class="signal-watermark">VIP TEACH ACADEMY</div>
+        </section>
+
+        <section class="history-section" id="historySection">
+            <div class="history-title">Trade History</div>
+            <div class="history-list" id="historyList">
+                <div style="text-align: center; color: var(--text-muted); font-size: 12px; padding: 10px;">No trades completed yet.</div>
+            </div>
+        </section>
+    </div>
+
+    <div class="connection-status">
+        <div class="status-dot" id="connectionDot"></div>
+        <span id="connectionText">Disconnected</span>
+    </div>
+
+    <div class="main-watermark">VIP TEACH ACADEMY © 2024</div>
+
+    <script>
+/**
+ * VIP TEACH ACADEMY - Professional Trading Signal Bot
+ * Confluence Strategy: S/R + Pattern + Trend
+ * © 2024 All Rights Reserved
+ */
+
+(function() {
+    'use strict';
+    
+    // Prevent right-click and text selection
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('copy', e => e.preventDefault());
+
+    // ============================================
+    // CONFIGURATION
+    // ============================================
+    const CONFIG = {
+        WS_URL: 'wss://ws.binaryws.com/websockets/v3?app_id=61502',
+        TICK_HISTORY_COUNT: 500,
+        CANDLE_COUNT: 100,
+        RECONNECT_DELAY: 3000
+    };
+
+    // Asset display names mapping
+    const ASSET_NAMES = {
+        '1HZ10V': 'VOLATILITY 10 (1S) INDEX',
+        '1HZ25V': 'VOLATILITY 25 (1S) INDEX',
+        '1HZ50V': 'VOLATILITY 50 (1S) INDEX',
+        '1HZ75V': 'VOLATILITY 75 (1S) INDEX',
+        '1HZ100V': 'VOLATILITY 100 (1S) INDEX',
+        'R_10': 'VOLATILITY 10 INDEX',
+        'R_25': 'VOLATILITY 25 INDEX',
+        'R_50': 'VOLATILITY 50 INDEX',
+        'R_75': 'VOLATILITY 75 INDEX',
+        'R_100': 'VOLATILITY 100 INDEX',
+        'frxXAUUSD': 'XAU/USD',
+        'frxEURUSD': 'EUR/USD',
+        'frxGBPUSD': 'GBP/USD',
+        'frxUSDJPY': 'USD/JPY',
+        'frxUSDCAD': 'USD/CAD',
+        'frxAUDUSD': 'AUD/USD',
+        'frxUSDCHF': 'USD/CHF',
+        'frxNZDUSD': 'NZD/USD',
+        'frxEURUSD_OTC': 'EUR/USD OTC',
+        'frxGBPUSD_OTC': 'GBP/USD OTC',
+        'frxUSDJPY_OTC': 'USD/JPY OTC',
+        'frxAUDUSD_OTC': 'AUD/USD OTC',
+        'frxEURJPY_OTC': 'EUR/JPY OTC',
+        'frxGBPJPY_OTC': 'GBP/JPY OTC'
+    };
+
+    // ============================================
+    // STATE MANAGEMENT
+    // ============================================
+    const state = {
+        ws: null,
+        isConnected: false,
+        isRunning: false,
+        isLocked: false,
+        currentAsset: 'frxEURUSD',
+        minConfidence: 85,
+        currentTimeframe: 60,
+        tradeDuration: 1,
+        tickHistory: [],
+        candles: [],
+        lastPrice: null,
+        openPrice: null,
+        highPrice: null,
+        lowPrice: null,
+        volume: 0,
+        tickCount: 0,
+        lastTickTime: null,
+        ticksPerSecond: 0,
+        countdownInterval: null,
+        signalLockedUntil: null,
+        reqId: 1,
+        pendingSignal: null,
+        signalStartPrice: null,
+        signalStartTime: null,
+        signalType: null,
+        waitingForNextMinute: false,
+        targetStartTime: null
+    };
+
+    // ============================================
+    // DOM ELEMENTS
+    // ============================================
+    const DOM = {
+        assetName: document.getElementById('assetName'),
+        livePrice: document.getElementById('livePrice'),
+        priceChange: document.getElementById('priceChange'),
+        changeIcon: document.getElementById('changeIcon'),
+        changeValue: document.getElementById('changeValue'),
+        statOpen: document.getElementById('statOpen'),
+        statHigh: document.getElementById('statHigh'),
+        statLow: document.getElementById('statLow'),
+        statClose: document.getElementById('statClose'),
+        statSpread: document.getElementById('statSpread'),
+        statChange: document.getElementById('statChange'),
+        statVolume: document.getElementById('statVolume'),
+        statTicks: document.getElementById('statTicks'),
+        assetSelect: document.getElementById('assetSelect'),
+        confidenceSelect: document.getElementById('confidenceSelect'),
+        timeframeSelect: document.getElementById('timeframeSelect'),
+        durationSelect: document.getElementById('durationSelect'),
+        startBtn: document.getElementById('startBtn'),
+        stopBtn: document.getElementById('stopBtn'),
+        signalDisplay: document.getElementById('signalDisplay'),
+        signalStatus: document.getElementById('signalStatus'),
+        signalType: document.getElementById('signalType'),
+        signalConfidence: document.getElementById('signalConfidence'),
+        countdownDisplay: document.getElementById('countdownDisplay'),
+        countdownTimer: document.getElementById('countdownTimer'),
+        resultDisplay: document.getElementById('resultDisplay'),
+        historyList: document.getElementById('historyList'),
+        connectionDot: document.getElementById('connectionDot'),
+        connectionText: document.getElementById('connectionText')
+    };
+
+    // ============================================
+    // INDICATOR DOM ELEMENTS
+    // ============================================
+    const Indicators = {
+        rsi: { value: document.getElementById('rsiValue'), status: document.getElementById('rsiStatus'), details: document.getElementById('rsiDetails') },
+        macd: { value: document.getElementById('macdValue'), status: document.getElementById('macdStatus'), details: document.getElementById('macdDetails') },
+        ema: { value: document.getElementById('emaValue'), status: document.getElementById('emaStatus'), details: document.getElementById('emaDetails') },
+        stoch: { value: document.getElementById('stochValue'), status: document.getElementById('stochStatus'), details: document.getElementById('stochDetails') },
+        bb: { value: document.getElementById('bbValue'), status: document.getElementById('bbStatus'), details: document.getElementById('bbDetails') },
+        vol: { value: document.getElementById('volValue'), status: document.getElementById('volStatus'), details: document.getElementById('volDetails') },
+        sr: { value: document.getElementById('srValue'), status: document.getElementById('srStatus'), details: document.getElementById('srDetails') },
+        mom: { value: document.getElementById('momValue'), status: document.getElementById('momStatus'), details: document.getElementById('momDetails') },
+        trend: { value: document.getElementById('trendValue'), status: document.getElementById('trendStatus'), details: document.getElementById('trendDetails') },
+        vola: { value: document.getElementById('volaValue'), status: document.getElementById('volaStatus'), details: document.getElementById('volaDetails') },
+        pattern: { value: document.getElementById('patternValue'), status: document.getElementById('patternStatus'), details: document.getElementById('patternDetails') },
+        strength: { value: document.getElementById('strengthValue'), status: document.getElementById('strengthStatus'), details: document.getElementById('strengthDetails') }
+    };
+
+    // ============================================
+    // TECHNICAL ANALYSIS FUNCTIONS
+    // ============================================
+    class TechnicalAnalysis {
+        static calculateRSI(prices, period = 14) {
+            if (prices.length < period + 1) return null;
+            let gains = 0, losses = 0;
+            for (let i = prices.length - period; i < prices.length; i++) {
+                const change = prices[i] - prices[i - 1];
+                if (change > 0) gains += change;
+                else losses -= change;
+            }
+            const avgGain = gains / period;
+            const avgLoss = losses / period;
+            if (avgLoss === 0) return 100;
+            const rs = avgGain / avgLoss;
+            return 100 - (100 / (1 + rs));
+        }
+
+        static calculateEMA(prices, period) {
+            if (prices.length < period) return null;
+            const multiplier = 2 / (period + 1);
+            let ema = prices.slice(0, period).reduce((a, b) => a + b) / period;
+            for (let i = period; i < prices.length; i++) {
+                ema = (prices[i] - ema) * multiplier + ema;
+            }
+            return ema;
+        }
+
+        static calculateMACD(prices) {
+            if (prices.length < 26) return null;
+            const ema12 = this.calculateEMA(prices, 12);
+            const ema26 = this.calculateEMA(prices, 26);
+            if (!ema12 || !ema26) return null;
+            const macd = ema12 - ema26;
+            
+            const macdValues = [];
+            for (let i = 26; i <= prices.length; i++) {
+                const e12 = this.calculateEMA(prices.slice(0, i), 12);
+                const e26 = this.calculateEMA(prices.slice(0, i), 26);
+                if (e12 && e26) macdValues.push(e12 - e26);
+            }
+            const signal = macdValues.length >= 9 ? this.calculateEMA(macdValues, 9) : null;
+            return { macd, signal, histogram: macd - (signal || 0) };
+        }
+
+        static calculateStochastic(prices, period = 14) {
+            if (prices.length < period) return null;
+            const recentPrices = prices.slice(-period);
+            const high = Math.max(...recentPrices);
+            const low = Math.min(...recentPrices);
+            const close = prices[prices.length - 1];
+            if (high === low) return { k: 50, d: 50 };
+            const k = ((close - low) / (high - low)) * 100;
+            
+            const kValues = [];
+            for (let i = period; i <= prices.length; i++) {
+                const rp = prices.slice(i - period, i);
+                const h = Math.max(...rp);
+                const l = Math.min(...rp);
+                const c = prices[i - 1];
+                if (h !== l) kValues.push(((c - l) / (h - l)) * 100);
+            }
+            const d = kValues.length >= 3 ? kValues.slice(-3).reduce((a, b) => a + b) / 3 : k;
+            return { k, d };
+        }
+
+        static calculateBollingerBands(prices, period = 20, stdDev = 2) {
+            if (prices.length < period) return null;
+            const recentPrices = prices.slice(-period);
+            const sma = recentPrices.reduce((a, b) => a + b) / period;
+            const variance = recentPrices.reduce((sum, price) => sum + Math.pow(price - sma, 2), 0) / period;
+            const std = Math.sqrt(variance);
+            return {
+                upper: sma + (stdDev * std),
+                middle: sma,
+                lower: sma - (stdDev * std),
+                price: prices[prices.length - 1],
+                percentB: (prices[prices.length - 1] - (sma - stdDev * std)) / (2 * stdDev * std)
+            };
+        }
+
+        static calculateSupportResistance(prices, period = 20) {
+            if (prices.length < period) return null;
+            const recentPrices = prices.slice(-period);
+            const currentPrice = prices[prices.length - 1];
+            
+            const pivots = [];
+            for (let i = 2; i < recentPrices.length - 2; i++) {
+                if (recentPrices[i] < recentPrices[i-1] && recentPrices[i] < recentPrices[i+1] &&
+                    recentPrices[i] < recentPrices[i-2] && recentPrices[i] < recentPrices[i+2]) {
+                    pivots.push({ type: 'support', price: recentPrices[i] });
+                }
+                if (recentPrices[i] > recentPrices[i-1] && recentPrices[i] > recentPrices[i+1] &&
+                    recentPrices[i] > recentPrices[i-2] && recentPrices[i] > recentPrices[i+2]) {
+                    pivots.push({ type: 'resistance', price: recentPrices[i] });
+                }
+            }
+            
+            const supports = pivots.filter(p => p.type === 'support' && p.price < currentPrice).sort((a, b) => b.price - a.price);
+            const resistances = pivots.filter(p => p.type === 'resistance' && p.price > currentPrice).sort((a, b) => a.price - b.price);
+            return {
+                support: supports.length > 0 ? supports[0].price : Math.min(...recentPrices),
+                resistance: resistances.length > 0 ? resistances[0].price : Math.max(...recentPrices),
+                currentPrice
+            };
+        }
+
+        static calculateMomentum(prices, period = 10) {
+            if (prices.length < period) return null;
+            const current = prices[prices.length - 1];
+            const previous = prices[prices.length - period - 1];
+            return ((current - previous) / previous) * 100;
+        }
+
+        static detectTrend(prices, shortPeriod = 10, longPeriod = 20) {
+            if (prices.length < longPeriod) return null;
+            const shortEMA = this.calculateEMA(prices, shortPeriod);
+            const longEMA = this.calculateEMA(prices, longPeriod);
+            if (!shortEMA || !longEMA) return null;
+            const emaDiff = ((shortEMA - longEMA) / longEMA) * 100;
+            if (emaDiff > 0.1) return { direction: 'UP', strength: Math.min(emaDiff * 10, 100) };
+            if (emaDiff < -0.1) return { direction: 'DOWN', strength: Math.min(Math.abs(emaDiff) * 10, 100) };
+            return { direction: 'SIDEWAYS', strength: 100 - Math.abs(emaDiff) * 100 };
+        }
+
+        static calculateVolatility(prices, period = 20) {
+            if (prices.length < period) return null;
+            const returns = [];
+            for (let i = prices.length - period; i < prices.length; i++) {
+                if (prices[i - 1] !== 0) {
+                    returns.push(Math.abs((prices[i] - prices[i - 1]) / prices[i - 1]));
+                }
+            }
+            const avgReturn = returns.reduce((a, b) => a + b, 0) / returns.length;
+            return avgReturn * 100;
+        }
+
+        static detectCandlePattern(candles) {
+            if (candles.length < 3) return null;
+            const last = candles[candles.length - 1];
+            const prev = candles[candles.length - 2];
+            const prevPrev = candles[candles.length - 3];
+            const lastBody = Math.abs(last.close - last.open);
+            const lastRange = last.high - last.low;
+            const lastDirection = last.close > last.open ? 'bullish' : 'bearish';
+            
+            const prevBody = Math.abs(prev.close - prev.open);
+            const prevRange = prev.high - prev.low;
+            const prevDirection = prev.close > prev.open ? 'bullish' : 'bearish';
+            if (lastBody < lastRange * 0.1) {
+                return { pattern: 'DOJI', signal: 'reversal' };
+            }
+            
+            const lowerWick = Math.min(last.open, last.close) - last.low;
+            const upperWick = last.high - Math.max(last.open, last.close);
+            if (lowerWick > lastBody * 2 && upperWick < lastBody * 0.5 && lastDirection === 'bullish') {
+                return { pattern: 'HAMMER', signal: 'bullish' };
+            }
+            
+            if (upperWick > lastBody * 2 && lowerWick < lastBody * 0.5 && lastDirection === 'bearish') {
+                return { pattern: 'SHOOTING STAR', signal: 'bearish' };
+            }
+            
+            if (prevDirection === 'bearish' && lastDirection === 'bullish' && 
+                last.open < prev.close && last.close > prev.open) {
+                return { pattern: 'BULLISH ENGULFING', signal: 'bullish' };
+            }
+            
+            if (prevDirection === 'bullish' && lastDirection === 'bearish' && 
+                last.open > prev.close && last.close < prev.open) {
+                return { pattern: 'BEARISH ENGULFING', signal: 'bearish' };
+            }
+            
+            if (prevPrev && Math.abs(prevPrev.close - prevPrev.open) > prevBody * 1.5) {
+                if (prevBody < prevRange * 0.3 && lastDirection === 'bullish') {
+                    return { pattern: 'MORNING STAR', signal: 'bullish' };
+                }
+                if (prevBody < prevRange * 0.3 && lastDirection === 'bearish') {
+                    return { pattern: 'EVENING STAR', signal: 'bearish' };
+                }
+            }
+            
+            return { pattern: lastDirection.toUpperCase(), signal: lastDirection };
+        }
+    }
+
+    // ============================================
+    // WEBSOCKET CONNECTION
+    // ============================================
+    function connectWebSocket() {
+        if (state.ws) {
+            state.ws.close();
+        }
+        
+        updateConnectionStatus(false, 'Connecting...');
+        state.ws = new WebSocket(CONFIG.WS_URL);
+        
+        state.ws.onopen = () => {
+            updateConnectionStatus(true, 'Connected');
+            console.log('[VIP TEACH ACADEMY] WebSocket connected');
+        };
+        
+        state.ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            handleWebSocketMessage(data);
+        };
+        
+        state.ws.onerror = (error) => {
+            console.error('[VIP TEACH ACADEMY] WebSocket error:', error);
+            updateConnectionStatus(false, 'Error');
+        };
+        
+        state.ws.onclose = () => {
+            updateConnectionStatus(false, 'Disconnected');
+            console.log('[VIP TEACH ACADEMY] WebSocket disconnected');
+            
+            if (state.isRunning) {
+                setTimeout(() => {
+                    if (state.isRunning) {
+                        connectWebSocket();
+                    }
+                }, CONFIG.RECONNECT_DELAY);
+            }
+        };
+    }
+
+    function sendMessage(data) {
+        if (state.ws && state.ws.readyState === WebSocket.OPEN) {
+            data.req_id = state.reqId++;
+            state.ws.send(JSON.stringify(data));
+        }
+    }
+
+    function handleWebSocketMessage(data) {
+        if (data.error) {
+            console.error('[VIP TEACH ACADEMY] API Error:', data.error);
+            return;
+        }
+        
+        if (data.tick) {
+            handleTick(data.tick);
+        }
+        
+        if (data.history) {
+            handleTickHistory(data.history);
+        }
+        
+        if (data.candles) {
+            handleCandles(data.candles);
+        }
+    }
+
+    // ============================================
+    // DATA HANDLERS
+    // ============================================
+    function handleTick(tick) {
+        if (!state.isRunning) return;
+        const price = parseFloat(tick.quote);
+        const time = tick.epoch * 1000;
+        
+        state.tickCount++;
+        if (!state.lastTickTime) {
+            state.lastTickTime = time;
+        }
+        
+        const elapsed = (time - state.lastTickTime) / 1000;
+        if (elapsed >= 1) {
+            state.ticksPerSecond = Math.round(state.tickCount / elapsed);
+            state.tickCount = 0;
+            state.lastTickTime = time;
+        }
+        
+        state.tickHistory.push(price);
+        if (state.tickHistory.length > CONFIG.TICK_HISTORY_COUNT) {
+            state.tickHistory.shift();
+        }
+        
+        if (state.openPrice === null) state.openPrice = price;
+        state.highPrice = state.highPrice === null ? price : Math.max(state.highPrice, price);
+        state.lowPrice = state.lowPrice === null ? price : Math.min(state.lowPrice, price);
+        updatePriceDisplay(price);
+        
+        // Wait for exact minute to capture Entry Price and start the countdown
+        if (state.waitingForNextMinute && state.pendingSignal && state.targetStartTime !== null) {
+            const now = Date.now();
+            if (now >= state.targetStartTime) {
+                state.waitingForNextMinute = false;
+                state.isLocked = true;
+                state.signalStartPrice = price;
+                state.signalType = state.pendingSignal.signal;
+                state.signalStartTime = new Date();
+                state.signalLockedUntil = state.targetStartTime + (state.tradeDuration * 60 * 1000);
+                
+                updateSignalDisplay(state.pendingSignal.signal, price);
+                startCountdown();
+                
+                state.pendingSignal = null;
+            }
+        }
+        
+        analyzeMarket();
+    }
+
+    function handleTickHistory(history) {
+        state.tickHistory = history.prices.map(p => parseFloat(p));
+        state.lastPrice = state.tickHistory[state.tickHistory.length - 1];
+        state.openPrice = state.lastPrice;
+        state.highPrice = Math.max(...state.tickHistory);
+        state.lowPrice = Math.min(...state.tickHistory);
+        
+        updatePriceDisplay(state.lastPrice);
+    }
+
+    function handleCandles(candles) {
+        state.candles = candles.map(c => ({
+            open: parseFloat(c.open),
+            high: parseFloat(c.high),
+            low: parseFloat(c.low),
+            close: parseFloat(c.close),
+            epoch: c.epoch
+        }));
+    }
+
+    // ============================================
+    // UI UPDATE FUNCTIONS
+    // ============================================
+    function updateConnectionStatus(connected, text) {
+        state.isConnected = connected;
+        DOM.connectionDot.classList.toggle('connected', connected);
+        DOM.connectionText.textContent = text;
+    }
+
+    function updatePriceDisplay(price) {
+        const prevPrice = state.lastPrice;
+        state.lastPrice = price;
+        
+        DOM.livePrice.textContent = price.toFixed(price < 10 ? 4 : price < 100 ? 3 : 2);
+        DOM.livePrice.classList.remove('up', 'down');
+        if (prevPrice !== null) {
+            if (price > prevPrice) {
+                DOM.livePrice.classList.add('up');
+            } else if (price < prevPrice) {
+                DOM.livePrice.classList.add('down');
+            }
+        }
+        
+        DOM.statOpen.textContent = state.openPrice ? state.openPrice.toFixed(price < 10 ? 4 : 2) : '--';
+        DOM.statHigh.textContent = state.highPrice ? state.highPrice.toFixed(price < 10 ? 4 : 2) : '--';
+        DOM.statLow.textContent = state.lowPrice ? state.lowPrice.toFixed(price < 10 ? 4 : 2) : '--';
+        DOM.statClose.textContent = price.toFixed(price < 10 ? 4 : 2);
+        if (state.openPrice) {
+            const change = ((price - state.openPrice) / state.openPrice) * 100;
+            DOM.statChange.textContent = (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
+            DOM.changeValue.textContent = (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
+            DOM.changeIcon.textContent = change >= 0 ? '▲' : '▼';
+            
+            DOM.priceChange.classList.remove('positive', 'negative');
+            DOM.priceChange.classList.add(change >= 0 ? 'positive' : 'negative');
+        }
+        
+        DOM.statTicks.textContent = state.ticksPerSecond;
+        state.volume += Math.abs(price - (prevPrice || price));
+        DOM.statVolume.textContent = Math.round(state.volume);
+        
+        const spread = price * 0.0002;
+        DOM.statSpread.textContent = spread.toFixed(price < 10 ? 5 : 3);
+    }
+
+    function updateIndicatorDisplay(indicator, data) {
+        const el = Indicators[indicator];
+        if (!el) return;
+        
+        if (data.value !== undefined) {
+            el.value.textContent = data.value;
+        }
+        
+        if (data.status) {
+            el.status.textContent = data.status;
+            el.status.className = 'indicator-status';
+            
+            if (data.status.toLowerCase().includes('bullish') || data.status.toLowerCase().includes('buy') || data.status.toLowerCase().includes('up')) {
+                el.status.classList.add('status-bullish');
+            } else if (data.status.toLowerCase().includes('bearish') || data.status.toLowerCase().includes('sell') || data.status.toLowerCase().includes('down')) {
+                el.status.classList.add('status-bearish');
+            } else {
+                el.status.classList.add('status-neutral');
+            }
+        }
+        
+        if (data.details) {
+            el.details.textContent = data.details;
+        }
+    }
+
+    function updateSignalDisplay(signal, startPrice) {
+        DOM.signalDisplay.classList.remove('signal-call', 'signal-put');
+        if (signal === 'CALL') {
+            DOM.signalDisplay.classList.add('signal-call');
+            DOM.signalType.textContent = 'CALL ▲';
+            DOM.signalType.className = 'signal-type call';
+        } else if (signal === 'PUT') {
+            DOM.signalDisplay.classList.add('signal-put');
+            DOM.signalType.textContent = 'PUT ▼';
+            DOM.signalType.className = 'signal-type put';
+        } else {
+            DOM.signalType.textContent = '--';
+            DOM.signalType.className = 'signal-type';
+        }
+        
+        if (startPrice) {
+            DOM.signalConfidence.innerHTML = `Entry Price Captured: <span>${startPrice.toFixed(5)}</span>`;
+        } else {
+            DOM.signalConfidence.innerHTML = `Start Time: <span>--:--:--</span>`;
+        }
+        
+        DOM.signalStatus.textContent = signal ? 'Trade Active! Monitoring Market...' : 'Scanning for signals...';
+        DOM.resultDisplay.classList.remove('win', 'loss');
+        DOM.resultDisplay.style.display = 'none';
+    }
+
+    // ============================================
+    // MARKET ANALYSIS & INDICATOR STATUS - NEW LOGIC
+    // ============================================
+    function analyzeMarket() {
+        if (state.tickHistory.length < 50) return;
+        const prices = state.tickHistory;
+        
+        // 1. Update all indicators on the UI
+        updateAllIndicators(prices);
+        // 2. Modified Strategy: Confluence of S/R + Pattern + Trend
+        if (!state.isLocked && !state.waitingForNextMinute) {
+            
+            // Get current status of our core strategy pillars
+            const srStatus = Indicators['sr'].status.classList.contains('status-bullish') ? 'BULLISH' :
+                             Indicators['sr'].status.classList.contains('status-bearish') ? 'BEARISH' : 'NEUTRAL';
+                             
+            const patternStatus = Indicators['pattern'].status.classList.contains('status-bullish') ? 'BULLISH' :
+                                  Indicators['pattern'].status.classList.contains('status-bearish') ? 'BEARISH' : 'NEUTRAL';
+                                  
+            const trendStatus = Indicators['trend'].status.classList.contains('status-bullish') ? 'BULLISH' :
+                                Indicators['trend'].status.classList.contains('status-bearish') ? 'BEARISH' : 'NEUTRAL';
+
+            // Also check general indicator sentiment (as a filter)
+            let bullishCount = 0;
+            let bearishCount = 0;
+            const indicatorKeys = ['rsi', 'macd', 'ema', 'stoch', 'bb', 'vol', 'sr', 'mom', 'trend', 'vola', 'pattern'];
+            indicatorKeys.forEach(key => {
+                const el = Indicators[key].status;
+                if (el.classList.contains('status-bullish')) bullishCount++;
+                else if (el.classList.contains('status-bearish')) bearishCount++;
+            });
+            // Confluence Conditions
+            let strongBuySignal = (srStatus === 'BULLISH' && patternStatus === 'BULLISH');
+            let strongSellSignal = (srStatus === 'BEARISH' && patternStatus === 'BEARISH');
+            // Base percentage calculated from all indicators (just to give a numeric value)
+            let baseConfidence = (Math.max(bullishCount, bearishCount) / indicatorKeys.length) * 100;
+            let finalSignal = null;
+            let finalConfidence = 0;
+
+            // Generate signal ONLY if core strategy matches, then boost the confidence score
+            if (strongBuySignal && trendStatus !== 'BEARISH' && bullishCount >= bearishCount) {
+                finalSignal = 'CALL';
+                finalConfidence = Math.min(baseConfidence + 30, 100); // Massive boost for hitting confluence
+            } 
+            else if (strongSellSignal && trendStatus !== 'BULLISH' && bearishCount >= bullishCount) {
+                finalSignal = 'PUT';
+                finalConfidence = Math.min(baseConfidence + 30, 100);
+            } 
+            else {
+                // If the strict strategy is not met, lower the confidence so it doesn't trigger
+                finalConfidence = baseConfidence * 0.5;
+                if (bullishCount > bearishCount) finalSignal = 'CALL';
+                else if (bearishCount > bullishCount) finalSignal = 'PUT';
+            }
+
+            const signalData = {
+                signal: finalSignal || 'CALL',
+                confidence: finalConfidence
+            };
+            // TRIGGER ONLY IF DYNAMIC CONFIDENCE >= THRESHOLD
+            if (finalSignal && finalConfidence >= state.minConfidence) {
+                generateSignal(signalData);
+            } else {
+                updateIndicatorDisplay('strength', {
+                    value: finalConfidence.toFixed(0) + '%',
+                    status: finalConfidence >= 75 ? 'HIGH' : finalConfidence >= 50 ? 'MEDIUM' : 'LOW',
+                    details: `Waiting for Confluence... (S/R: ${srStatus.charAt(0)}, Pat: ${patternStatus.charAt(0)})`
+                });
+            }
+        }
+    }
+
+    function updateAllIndicators(prices) {
+        const currentPrice = prices[prices.length - 1];
+        const prevPrice = prices[prices.length - 2] || currentPrice;
+        const priceUp = currentPrice >= prevPrice;
+
+        const rsi = TechnicalAnalysis.calculateRSI(prices);
+        if (rsi !== null) {
+            const bias = rsi < 40 ? 'BULLISH' : rsi > 60 ? 'BEARISH' : 'NEUTRAL';
+            updateIndicatorDisplay('rsi', {
+                value: rsi.toFixed(1),
+                status: bias,
+                details: rsi < 30 ? 'OVERSOLD' : rsi > 70 ? 'OVERBOUGHT' : 'NEUTRAL zone'
+            });
+        }
+        
+        const macd = TechnicalAnalysis.calculateMACD(prices);
+        if (macd !== null) {
+            const status = macd.histogram > 0 ? 'BULLISH' : 'BEARISH';
+            updateIndicatorDisplay('macd', {
+                value: macd.macd.toFixed(4),
+                status: status,
+                details: `Signal: ${macd.signal?.toFixed(4) || '--'} | Hist: ${macd.histogram.toFixed(4)}`
+            });
+        }
+        
+        const emaFast = TechnicalAnalysis.calculateEMA(prices, 9);
+        const emaSlow = TechnicalAnalysis.calculateEMA(prices, 21);
+        if (emaFast !== null && emaSlow !== null) {
+            const diff = ((emaFast - emaSlow) / emaSlow) * 100;
+            const status = emaFast > emaSlow ? 'BULLISH' : 'BEARISH';
+            updateIndicatorDisplay('ema', {
+                value: diff.toFixed(2) + '%',
+                status: status,
+                details: `Fast: ${emaFast.toFixed(4)} | Slow: ${emaSlow.toFixed(4)}`
+            });
+        }
+        
+        const stoch = TechnicalAnalysis.calculateStochastic(prices);
+        if (stoch !== null) {
+            const bias = stoch.k < 30 ? 'BULLISH' : stoch.k > 70 ? 'BEARISH' : 'NEUTRAL';
+            updateIndicatorDisplay('stoch', {
+                value: stoch.k.toFixed(1),
+                status: bias,
+                details: `%K: ${stoch.k.toFixed(1)} | %D: ${stoch.d.toFixed(1)}`
+            });
+        }
+        
+        const bb = TechnicalAnalysis.calculateBollingerBands(prices);
+        if (bb !== null) {
+            const bias = bb.percentB < 0.2 ? 'BULLISH' : bb.percentB > 0.8 ? 'BEARISH' : 'NEUTRAL';
+            updateIndicatorDisplay('bb', {
+                value: (bb.percentB * 100).toFixed(0) + '%',
+                status: bias,
+                details: `U: ${bb.upper.toFixed(4)} | L: ${bb.lower.toFixed(4)}`
+            });
+        }
+        
+        const volBias = state.ticksPerSecond > 2 ? (priceUp ? 'BULLISH' : 'BEARISH') : 'NEUTRAL';
+        updateIndicatorDisplay('vol', {
+            value: state.ticksPerSecond || '--',
+            status: volBias,
+            details: 'Tick frequency analysis'
+        });
+        const sr = TechnicalAnalysis.calculateSupportResistance(prices);
+        if (sr !== null) {
+            const distToSupport = ((sr.currentPrice - sr.support) / sr.currentPrice) * 100;
+            const distToResistance = ((sr.resistance - sr.currentPrice) / sr.currentPrice) * 100;
+            const status = distToSupport < distToResistance ? 'NEAR SUPPORT' : 'NEAR RESISTANCE';
+            updateIndicatorDisplay('sr', {
+                value: status.includes('SUPPORT') ? 'S' : 'R',
+                status: status.includes('SUPPORT') ? 'BULLISH' : 'BEARISH',
+                details: `S: ${sr.support.toFixed(4)} | R: ${sr.resistance.toFixed(4)}`
+            });
+        }
+        
+        const mom = TechnicalAnalysis.calculateMomentum(prices);
+        if (mom !== null) {
+            const status = mom > 0.1 ? 'BULLISH' : mom < -0.1 ? 'BEARISH' : 'NEUTRAL';
+            updateIndicatorDisplay('mom', {
+                value: mom.toFixed(2) + '%',
+                status: status,
+                details: '10-period momentum'
+            });
+        }
+        
+        const trend = TechnicalAnalysis.detectTrend(prices);
+        if (trend !== null) {
+            updateIndicatorDisplay('trend', {
+                value: trend.direction,
+                status: trend.direction === 'UP' ? 'BULLISH' : trend.direction === 'DOWN' ? 'BEARISH' : 'NEUTRAL',
+                details: `Strength: ${trend.strength.toFixed(0)}%`
+            });
+        }
+        
+        const volatility = TechnicalAnalysis.calculateVolatility(prices);
+        if (volatility !== null) {
+            const volaBias = volatility > 0.2 ? (priceUp ? 'BULLISH' : 'BEARISH') : 'NEUTRAL';
+            updateIndicatorDisplay('vola', {
+                value: volatility.toFixed(2) + '%',
+                status: volaBias,
+                details: 'Market volatility'
+            });
+        }
+        
+        const pattern = TechnicalAnalysis.detectCandlePattern(state.candles);
+        if (pattern !== null) {
+            updateIndicatorDisplay('pattern', {
+                value: pattern.pattern,
+                status: pattern.signal.toUpperCase(),
+                details: 'Last candle pattern'
+            });
+        }
+    }
+
+    // ============================================
+    // TELEGRAM INTEGRATION
+    // ============================================
+    function sendTelegramMessage(signalData) {
+        const BOT_TOKEN = '8760790174:AAFSvjblNC9xSdQVxiyJEc7x9g6TE9uC8e0';
+        const CHAT_ID = '-5299857096';
+        
+        const assetName = ASSET_NAMES[state.currentAsset] || state.currentAsset;
+        const signalText = signalData.signal === 'CALL' ? '🟢 CALL (BUY) ▲' : '🔴 PUT (SELL) ▼';
+        const durationText = DOM.durationSelect.options[DOM.durationSelect.selectedIndex].text;
+        
+        const now = new Date();
+        const nextMinute = new Date(now);
+        nextMinute.setSeconds(0);
+        nextMinute.setMilliseconds(0);
+        nextMinute.setMinutes(nextMinute.getMinutes() + 1);
+        
+        const startTimeStr = nextMinute.toLocaleTimeString();
+        const dateStr = nextMinute.toLocaleDateString();
+        const message = `🚨 *VIP TEACH ACADEMY CONFLUENCE SIGNAL* 🚨\n\n` +
+                        `📈 *Asset:* ${assetName}\n` +
+                        `🎯 *Signal:* ${signalText}\n` +
+                        `⏰ *Start Time:* ${startTimeStr} (${dateStr})\n` +
+                        `⏳ *Duration:* ${durationText}\n\n` +
+                        `📊 *System Auto Generated Signal*`;
+        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+        
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message,
+                parse_mode: 'Markdown'
+            })
+        }).then(response => {
+            console.log('[VIP TEACH ACADEMY] Initial signal sent to Telegram successfully.');
+        }).catch(error => {
+            console.error('[VIP TEACH ACADEMY] Error sending to Telegram:', error);
+        });
+    }
+
+    // ============================================
+    // SIGNAL GENERATION & LOCKING
+    // ============================================
+    function generateSignal(signal) {
+        if (state.isLocked || state.waitingForNextMinute) return;
+        console.log('[VIP TEACH ACADEMY] Signal generated, sending immediately, waiting for next minute:', signal);
+        sendTelegramMessage(signal);
+        state.waitingForNextMinute = true;
+        state.pendingSignal = signal;
+        const now = new Date();
+        const nextMin = new Date(now);
+        nextMin.setSeconds(0);
+        nextMin.setMilliseconds(0);
+        nextMin.setMinutes(nextMin.getMinutes() + 1);
+        state.targetStartTime = nextMin.getTime();
+        DOM.signalStatus.textContent = `Signal Ready! Waiting for next minute (${nextMin.toLocaleTimeString()}) to start...`;
+        updateIndicatorDisplay('strength', {
+            value: signal.confidence.toFixed(0) + '%',
+            status: 'HIGH',
+            details: `Signal: ${signal.signal} | Waiting for exact minute...`
+        });
+    }
+
+    function startCountdown() {
+        DOM.countdownDisplay.classList.add('active');
+        if (state.countdownInterval) {
+            clearInterval(state.countdownInterval);
+        }
+        
+        state.countdownInterval = setInterval(() => {
+            const remaining = state.signalLockedUntil - Date.now();
+            
+            if (remaining <= 0) {
+                clearInterval(state.countdownInterval);
+                state.countdownInterval = null;
+                checkSignalResult();
+                return;
+            }
+            
+            const minutes = Math.floor(remaining / 60000);
+            const seconds = Math.floor((remaining % 60000) / 1000);
+            DOM.countdownTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }, 1000);
+    }
+
+    function checkSignalResult() {
+        const endPrice = state.lastPrice;
+        const startPrice = state.signalStartPrice;
+        const signalType = state.signalType;
+        
+        let isWin = false;
+        if (signalType === 'CALL') {
+            isWin = endPrice > startPrice;
+        } else if (signalType === 'PUT') {
+            isWin = endPrice < startPrice;
+        }
+        
+        DOM.resultDisplay.innerHTML = `${isWin ? '🎉 WIN!' : '❌ LOSS'} <br><span style="font-size: 16px;">Entry: ${startPrice.toFixed(5)} | Exit: ${endPrice.toFixed(5)}</span>`;
+        DOM.resultDisplay.className = 'result-display ' + (isWin ? 'win' : 'loss');
+        DOM.resultDisplay.style.display = 'block';
+        
+        appendTradeToHistory(isWin, startPrice, endPrice, signalType);
+        setTimeout(() => {
+            state.isLocked = false;
+            state.signalLockedUntil = null;
+            state.signalStartPrice = null;
+            state.signalType = null;
+            
+            DOM.countdownDisplay.classList.remove('active');
+            DOM.signalStatus.textContent = 'Scanning for next confluence signal...';
+            
+            DOM.signalType.textContent = '--';
+            DOM.signalType.className = 'signal-type';
+            DOM.signalConfidence.innerHTML = 'Start Time: <span>--:--:--</span>';
+            DOM.signalDisplay.classList.remove('signal-call', 'signal-put');
+            DOM.resultDisplay.classList.remove('win', 'loss');
+            DOM.resultDisplay.style.display = 'none';
+        }, 5000);
+    }
+    
+    function appendTradeToHistory(isWin, startPrice, endPrice, signalType) {
+        if (DOM.historyList.innerHTML.includes('No trades completed yet.')) {
+            DOM.historyList.innerHTML = '';
+        }
+        
+        const historyItem = document.createElement('div');
+        historyItem.className = `history-item ${isWin ? 'win' : 'loss'}`;
+        
+        const assetName = ASSET_NAMES[state.currentAsset] || state.currentAsset;
+        const timeStr = new Date().toLocaleTimeString();
+        historyItem.innerHTML = `
+            <div class="history-details">
+                <span class="history-asset">${assetName} - ${signalType}</span>
+                <span>Time: ${timeStr} | Entry: ${startPrice.toFixed(5)} | Exit: ${endPrice.toFixed(5)}</span>
+            </div>
+            <div class="history-result ${isWin ? 'win' : 'loss'}">${isWin ? 'WIN' : 'LOSS'}</div>
+        `;
+        DOM.historyList.prepend(historyItem);
+    }
+
+    // ============================================
+    // CONTROL FUNCTIONS
+    // ============================================
+    function startAnalysis() {
+        state.isRunning = true;
+        state.tickHistory = [];
+        state.candles = [];
+        state.openPrice = null;
+        state.highPrice = null;
+        state.lowPrice = null;
+        state.volume = 0;
+        state.lastPrice = null;
+        state.tickCount = 0;
+        state.ticksPerSecond = 0;
+        state.isLocked = false;
+        state.signalLockedUntil = null;
+        state.pendingSignal = null;
+        state.waitingForNextMinute = false;
+        state.signalStartPrice = null;
+        state.signalType = null;
+        state.targetStartTime = null;
+        if (state.countdownInterval) {
+            clearInterval(state.countdownInterval);
+            state.countdownInterval = null;
+        }
+        DOM.countdownDisplay.classList.remove('active');
+        
+        DOM.startBtn.disabled = true;
+        DOM.stopBtn.disabled = false;
+        DOM.assetSelect.disabled = true;
+        DOM.timeframeSelect.disabled = true;
+        DOM.durationSelect.disabled = true;
+        DOM.confidenceSelect.disabled = true;
+        
+        DOM.signalStatus.textContent = 'Connecting to market...';
+        DOM.signalType.textContent = '--';
+        DOM.signalConfidence.innerHTML = 'Start Time: <span>--:--:--</span>';
+        DOM.signalDisplay.classList.remove('signal-call', 'signal-put');
+        DOM.resultDisplay.classList.remove('win', 'loss');
+        DOM.resultDisplay.style.display = 'none';
+        
+        const assetKey = state.currentAsset;
+        DOM.assetName.textContent = ASSET_NAMES[assetKey] || assetKey;
+        
+        connectWebSocket();
+        
+        function subscribeWhenReady() {
+            if (state.ws && state.ws.readyState === WebSocket.OPEN) {
+                sendMessage({
+                    ticks_history: state.currentAsset,
+                    adjust_start_time: 1,
+                    count: CONFIG.TICK_HISTORY_COUNT,
+                    end: 'latest',
+                    style: 'ticks'
+                });
+                sendMessage({
+                    ticks: state.currentAsset,
+                    subscribe: 1
+                });
+                sendMessage({
+                    ticks_history: state.currentAsset,
+                    adjust_start_time: 1,
+                    count: CONFIG.CANDLE_COUNT,
+                    end: 'latest',
+                    granularity: state.currentTimeframe,
+                    style: 'candles'
+                });
+            } else if (state.isRunning) {
+                setTimeout(subscribeWhenReady, 500);
+            }
+        }
+        
+        subscribeWhenReady();
+    }
+
+    function stopAnalysis() {
+        state.isRunning = false;
+        if (state.ws) {
+            state.ws.close();
+            state.ws = null;
+        }
+        
+        if (state.countdownInterval) {
+            clearInterval(state.countdownInterval);
+            state.countdownInterval = null;
+        }
+        
+        state.tickHistory = [];
+        state.candles = [];
+        state.tickCount = 0;
+        state.ticksPerSecond = 0;
+        state.isLocked = false;
+        state.signalLockedUntil = null;
+        state.pendingSignal = null;
+        state.waitingForNextMinute = false;
+        state.targetStartTime = null;
+        
+        DOM.startBtn.disabled = false;
+        DOM.stopBtn.disabled = true;
+        DOM.assetSelect.disabled = false;
+        DOM.timeframeSelect.disabled = false;
+        DOM.durationSelect.disabled = false;
+        DOM.confidenceSelect.disabled = false;
+        
+        DOM.countdownDisplay.classList.remove('active');
+        DOM.signalStatus.textContent = 'Analysis stopped';
+        DOM.signalType.textContent = '--';
+        DOM.signalConfidence.innerHTML = 'Start Time: <span>--:--:--</span>';
+        DOM.signalDisplay.classList.remove('signal-call', 'signal-put');
+        DOM.resultDisplay.classList.remove('win', 'loss');
+        DOM.resultDisplay.style.display = 'none';
+        
+        Object.keys(Indicators).forEach(key => {
+            updateIndicatorDisplay(key, {
+                value: '--',
+                status: 'NEUTRAL',
+                details: 'Waiting for data...'
+            });
+        });
+        updateConnectionStatus(false, 'Disconnected');
+    }
+
+    // ============================================
+    // EVENT LISTENERS
+    // ============================================
+    DOM.startBtn.addEventListener('click', startAnalysis);
+    DOM.stopBtn.addEventListener('click', stopAnalysis);
+    
+    DOM.assetSelect.addEventListener('change', (e) => {
+        state.currentAsset = e.target.value;
+    });
+    DOM.confidenceSelect.addEventListener('change', (e) => {
+        state.minConfidence = parseInt(e.target.value);
+    });
+    DOM.timeframeSelect.addEventListener('change', (e) => {
+        state.currentTimeframe = parseInt(e.target.value);
+    });
+    DOM.durationSelect.addEventListener('change', (e) => {
+        state.tradeDuration = parseInt(e.target.value);
+    });
+
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    console.log('[VIP TEACH ACADEMY] Signal Bot initialized with Confluence Strategy');
+    
+    // Auto-start the analysis on load
+    setTimeout(() => {
+        startAnalysis();
+    }, 1000);
+
+})();
+    </script>
+</body>
+</html>
